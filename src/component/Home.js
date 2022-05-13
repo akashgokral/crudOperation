@@ -165,14 +165,6 @@ const Home = () => {
 
     const searchEmployee = (val) => {
 
-        // console.log(val);
-        // if (val === "" || val === null) {
-        //     settVal(psdata);
-        // }
-        // const searchData = tval.filter((data) => {
-        //     return (data.name.includes(val) || data.email.includes(val) || data.designation.includes(val));
-        // });
-        // settVal(searchData);
         const myTable = document.getElementById("employeetable");
         const searchRow = myTable.getElementsByTagName("tr");
         let i = 0;
