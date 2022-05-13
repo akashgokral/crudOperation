@@ -49,7 +49,7 @@ const Home = () => {
         const dEmp = {
             UserId: tdata.user_id,
         }
-        const res = await axios.post("http://localhost:5000/deleteUserById", dEmp, { Headers: { 'Content-Type': 'application/json' } })
+        const res = await axios.post("https://4h6651gx7i.execute-api.us-west-2.amazonaws.com/deleteUserById", dEmp, { Headers: { 'Content-Type': 'application/json' } })
         console.log(res);
         if (res.status === 200) {
             window.alert("Employee has been deleted");
@@ -67,7 +67,7 @@ const Home = () => {
 
 
     useEffect(() => {
-        axios.post("http://localhost:5000/getAllUser", { Headers: { 'Content-Type': 'application/json' } })
+        axios.post("https://4h6651gx7i.execute-api.us-west-2.amazonaws.com/getAllUser", { Headers: { 'Content-Type': 'application/json' } })
             .then((result) => {
                 console.log(result)
                 const newData = result.data.map((res) => {
@@ -105,7 +105,7 @@ const Home = () => {
 
 
         if (isUpdate) {
-            const res = await axios.post("http://localhost:5000/updateUserByID", val, { Headers: { 'Content-Type': 'application/json' } })
+            const res = await axios.post("https://4h6651gx7i.execute-api.us-west-2.amazonaws.com/updateUserByID", val, { Headers: { 'Content-Type': 'application/json' } })
             console.log(res);
             if (res.status === 200) {
 
@@ -132,7 +132,7 @@ const Home = () => {
                 setIsUpdate(false);
             }
         } else {
-            const res = await axios.post("http://localhost:5000/createUser", val, { Headers: { 'Content-Type': 'application/json' } })
+            const res = await axios.post("https://4h6651gx7i.execute-api.us-west-2.amazonaws.com/createUser", val, { Headers: { 'Content-Type': 'application/json' } })
             console.log(res);
             if (res.status === 200) {
                 const newEmployee = {
