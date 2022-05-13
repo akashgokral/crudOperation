@@ -1,0 +1,29 @@
+.inputs p {
+    width: 65px !important;
+}
+
+.inputs input, select {
+    border: 1px solid black;
+    border-radius: 8px !important;
+    padding: 5px 10px !important;
+}
+
+input:focus {
+    outline: none !important;
+
+}
+
+
+.btn {
+    width: 130px !important;
+    margin: 30px 130px;
+    border: 1px solid #000 !important;
+    margin-bottom: 0 !important;
+}
+
+
+
+.search_div {
+    display: flex !important;
+    justify-content: end;
+}
