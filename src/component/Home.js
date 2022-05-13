@@ -42,8 +42,28 @@ const Home = () => {
             setVal(upEmployee);
             setIsUpdate(true);
         }
-        // setVal(upEmployee);
     }
+
+    const deleteEmployee = async (tdata) => {
+        console.log(tdata)
+        const dEmp = {
+            UserId: tdata.user_id,
+        }
+        const res = await axios.post("http://localhost:5000/deleteUserById", dEmp, { Headers: { 'Content-Type': 'application/json' } })
+        console.log(res);
+        if (res.status === 200) {
+            window.alert("Employee has been deleted");
+            const deleteEmployee = tval.findIndex((o) => {
+                return o.user_id === tdata.user_id;
+            });
+            tval.splice(deleteEmployee, 1)
+        }
+        if (dEmp !== null) {
+            setVal(dEmp);
+            setIsUpdate(true);
+        }
+    }
+
 
 
     useEffect(() => {
@@ -86,10 +106,6 @@ const Home = () => {
 
 
         if (isUpdate) {
-
-            // const editedEmployee = {
-
-            // }
             const res = await axios.post("http://localhost:5000/updateUserByID", val, { Headers: { 'Content-Type': 'application/json' } })
             console.log(res);
             if (res.status === 200) {
@@ -113,7 +129,8 @@ const Home = () => {
                     salary: "",
                     designation: ""
 
-                })
+                });
+                setIsUpdate(false);
             }
         } else {
             const res = await axios.post("http://localhost:5000/createUser", val, { Headers: { 'Content-Type': 'application/json' } })
@@ -190,7 +207,7 @@ const Home = () => {
                                         <td>{tdata.salary}</td>
                                         <td>{tdata.designation}</td>
                                         <td className='edit_delete_btn'>
-                                            <button onClick={() => editEmployee(tdata)}>Edit</button>  <button>Delete</button>
+                                            <button onClick={() => editEmployee(tdata)}>Edit</button>  <button onClick={() => deleteEmployee(tdata)}>Delete</button>
 
                                         </td>
                                     </tr>
