@@ -24,8 +24,6 @@ const Home = () => {
 
     }]);
 
-    const [psdata, setPsData] = useState([]);
-
     const [isUpdate, setIsUpdate] = useState(false);
 
 
@@ -81,7 +79,6 @@ const Home = () => {
                         designation: res.designation
                     }
                 });
-                setPsData(newData);
                 settVal(newData);
                 console.log(tval);
             }).catch((err) => {
