@@ -24,6 +24,8 @@ const Home = () => {
 
     }]);
 
+    const [psdata, setPsData] = useState([]);
+
     const [isUpdate, setIsUpdate] = useState(false);
 
 
@@ -79,7 +81,7 @@ const Home = () => {
                         designation: res.designation
                     }
                 });
-
+                setPsData(newData);
                 settVal(newData);
                 console.log(tval);
             }).catch((err) => {
@@ -161,6 +163,41 @@ const Home = () => {
 
     }
 
+    const searchEmployee = (val) => {
+
+        // console.log(val);
+        // if (val === "" || val === null) {
+        //     settVal(psdata);
+        // }
+        // const searchData = tval.filter((data) => {
+        //     return (data.name.includes(val) || data.email.includes(val) || data.designation.includes(val));
+        // });
+        // settVal(searchData);
+        const myTable = document.getElementById("employeetable");
+        const searchRow = myTable.getElementsByTagName("tr");
+        let i = 0;
+        for (i = 0; i < searchRow.length; i++) {
+            var td = searchRow[i].getElementsByTagName("td")[0];
+            var td1 = searchRow[i].getElementsByTagName("td")[1];
+            var td2 = searchRow[i].getElementsByTagName("td")[2];
+            var td3 = searchRow[i].getElementsByTagName("td")[3];
+            if (td || td1 || td2 || td3) {
+                var txtValue = td.textContent || td.innertext;
+                var txtValue1 = td1.textContent || td1.innertext;
+                var txtValue2 = td2.textContent || td2.innertext;
+                var txtValue3 = td3.textContent || td3.innertext;
+                if (txtValue.toUpperCase().indexOf(val.toUpperCase()) > -1 || txtValue1.toUpperCase().indexOf(val.toUpperCase()) > -1 || txtValue2.toUpperCase().indexOf(val.toUpperCase()) > -1 || txtValue3.toUpperCase().indexOf(val.toUpperCase()) > -1) {
+                    searchRow[i].style.display = "";
+                } else {
+                    searchRow[i].style.display = "none";
+                }
+            }
+        }
+
+
+
+    }
+
 
 
     return (
@@ -173,7 +210,7 @@ const Home = () => {
                         <div className="d-flex inputs py-2">   <p >Salary:</p> <input type="number" className="ms-5" onChange={setdata} value={val.salary} name="salary"></input></div>
                         <div className="d-flex inputs py-2">  <p >Designation:        </p>
                             <select className="ms-5" onChange={setdata} value={val.designation} name="designation">
-                                <option value="" selected disabled hidden>Choose here</option>
+                                <option value="" selected disabled hidden>Select</option>
                                 <option >Frontend Developer</option>
                                 <option >Backend Developer</option>
                                 <option >MERN Stack Developer</option>
@@ -186,9 +223,9 @@ const Home = () => {
 
                 <div className="form_detail">
                     <div className="search_div">
-                        <div className="d-flex inputs py-2 ">   <p >Search:</p> <input type="text" className="ms-2"></input></div>
+                        <div className="d-flex inputs py-2 ">   <p >Search:</p> <input type="text" className="ms-2" onChange={(e) => searchEmployee(e.target.value)}></input></div>
                     </div>
-                    <table class="table table-bordered mt-2">
+                    <table className="table table-bordered mt-2" id="employeetable">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
